@@ -54,7 +54,7 @@
                     <td>{{ person.first_name }}</td>
                     <td>{{ person.last_name }}</td>
                     <td>{{ person.phone_number }}</td>
-                    <td><button class="delete-button" onclick="deletePerson('{{ person.thali_number }}')">Delete</button></td>
+                    <td><button class="delete-button" onclick="confirmDelete('{{ person.thali_number }}')">Delete</button></td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -83,8 +83,14 @@
             }
         };
 
-        // Function to delete a person
-        async function deletePerson(thali_number) {
+        // Function to confirm deletion before proceeding
+        async function confirmDelete(thali_number) {
+            const confirmed = confirm("Are you sure you want to delete this person?");
+            if (!confirmed) {
+                return;  // Exit if user cancels
+            }
+
+            // Proceed with delete if confirmed
             const response = await fetch(`/delete_person/${thali_number}`, {
                 method: 'DELETE'
             });
