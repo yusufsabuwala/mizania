@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from datetime import datetime
 
 # Initialize the Flask app
 app = Flask(__name__)
@@ -115,6 +116,57 @@ def submit_transaction():
     db.session.add(new_transaction)
     db.session.commit()
     return jsonify({'message': 'Transaction added successfully!'}), 201
+
+
+''' BUDGET '''
+# Define the Spending model if not already defined in models.py
+class Spending(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    amount = db.Column(db.Float, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+
+# Create tables if they don't exist
+with app.app_context():
+    db.create_all()
+
+# Route to render the spending page and display all current month entries
+@app.route('/budget', methods=['GET'])
+def track_spending_page():
+    current_month = datetime.utcnow().month
+    current_year = datetime.utcnow().year
+    total_spending = db.session.query(db.func.sum(Spending.amount)).filter(
+        db.extract('month', Spending.date) == current_month,
+        db.extract('year', Spending.date) == current_year
+    ).scalar() or 0  # Default to 0 if no data
+
+    # Fetch all entries for the current month
+    spending_entries = Spending.query.filter(
+        db.extract('month', Spending.date) == current_month,
+        db.extract('year', Spending.date) == current_year
+    ).all()
+
+    return render_template('budget.html', total_spending=total_spending, spending_entries=spending_entries)
+
+# Route to handle adding a new spending entry
+@app.route('/add_spending', methods=['POST'])
+def add_spending():
+    data = request.json
+    new_spending = Spending(amount=data['amount'])
+    db.session.add(new_spending)
+    db.session.commit()
+    return jsonify({'message': 'Spending entry added successfully!'}), 201
+
+# Route to delete a spending entry by ID
+@app.route('/delete_spending/<int:id>', methods=['DELETE'])
+def delete_spending(id):
+    spending_entry = Spending.query.get(id)
+    if spending_entry:
+        db.session.delete(spending_entry)
+        db.session.commit()
+        return jsonify({'message': 'Spending entry deleted successfully!'}), 200
+    else:
+        return jsonify({'error': 'Spending entry not found'}), 404
+
 
 
 # Route to view all transactions
