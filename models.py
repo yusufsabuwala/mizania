@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -22,3 +23,12 @@ class Transaction(db.Model):
     first_name = db.Column(db.String(100), nullable=False)  # Added field
     last_name = db.Column(db.String(100), nullable=False)   # Added field
     transaction_date = db.Column(db.DateTime, default=db.func.current_timestamp())
+
+class Spending(db.Model):
+    __tablename__ = 'spending'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    amount = db.Column(db.Float, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<Spending {self.id} - ${self.amount} on {self.date}>'
