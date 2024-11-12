@@ -2,12 +2,14 @@ from flask import Flask, request, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 # Initialize the Flask app
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fmb_fi.db'  # Path to your SQLite database
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+current_time_est = datetime.now(ZoneInfo("America/New_York"))
 
 # Initialize Flask-Migrate
 #migrate = Migrate(app, db)
@@ -123,7 +125,7 @@ def submit_transaction():
 class Spending(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     amount = db.Column(db.Float, nullable=False)
-    date = db.Column(db.DateTime, default=datetime.utcnow)
+    date = db.Column(db.DateTime, default=current_time_est)
 
 # Create tables if they don't exist
 with app.app_context():
@@ -167,6 +169,8 @@ def delete_spending(id):
     else:
         return jsonify({'error': 'Spending entry not found'}), 404
 
+
+#######################################################
 
 
 # Route to view all transactions

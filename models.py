@@ -1,7 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 db = SQLAlchemy()
+current_time_est = datetime.now(ZoneInfo("America/New_York"))
 
 class Person(db.Model):
     __tablename__ = 'person'
@@ -22,13 +24,13 @@ class Transaction(db.Model):
     total_amount = db.Column(db.Float, nullable=False)
     first_name = db.Column(db.String(100), nullable=False)  # Added field
     last_name = db.Column(db.String(100), nullable=False)   # Added field
-    transaction_date = db.Column(db.DateTime, default=db.func.current_timestamp())
+    transaction_date = db.Column(db.DateTime, default=current_time_est)
 
 class Spending(db.Model):
     __tablename__ = 'spending'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     amount = db.Column(db.Float, nullable=False)
-    date = db.Column(db.DateTime, default=datetime.utcnow)
+    date = db.Column(db.DateTime, default=db.func.current_timestamp())
 
     def __repr__(self):
         return f'<Spending {self.id} - ${self.amount} on {self.date}>'
