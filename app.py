@@ -1,8 +1,10 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, Response
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
 from zoneinfo import ZoneInfo
+import csv
+#from models import Spending
 
 # Initialize the Flask app
 app = Flask(__name__)
@@ -12,7 +14,7 @@ db = SQLAlchemy(app)
 current_time_est = datetime.now(ZoneInfo("America/New_York"))
 
 # Initialize Flask-Migrate
-#migrate = Migrate(app, db)
+migrate = Migrate(app, db)
 
 # Define the Person model
 class Person(db.Model):
@@ -122,14 +124,14 @@ def submit_transaction():
 
 ''' BUDGET '''
 # Define the Spending model if not already defined in models.py
+
 class Spending(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     amount = db.Column(db.Float, nullable=False)
+    description = db.Column(db.String(255), nullable=True)  # New column for details
+    payment_method = db.Column(db.String(50), nullable=True)  # New column for payment method
     date = db.Column(db.DateTime, default=current_time_est)
 
-# Create tables if they don't exist
-with app.app_context():
-    db.create_all()
 
 # Route to render the spending page and display all current month entries
 @app.route('/budget', methods=['GET'])
@@ -158,6 +160,20 @@ def add_spending():
     db.session.commit()
     return jsonify({'message': 'Spending entry added successfully!'}), 201
 
+# Route to edit a spending entry
+@app.route('/edit_spending/<int:id>', methods=['PUT'])
+def edit_spending(id):
+    data = request.json
+    spending_entry = Spending.query.get(id)
+    if spending_entry:
+        spending_entry.amount = data['amount']
+        spending_entry.description = data['description']
+        spending_entry.payment_method = data['payment_method']
+        db.session.commit()
+        return jsonify({'message': 'Spending entry updated successfully!'}), 200
+    else:
+        return jsonify({'error': 'Spending entry not found'}), 404
+
 # Route to delete a spending entry by ID
 @app.route('/delete_spending/<int:id>', methods=['DELETE'])
 def delete_spending(id):
@@ -169,7 +185,31 @@ def delete_spending(id):
     else:
         return jsonify({'error': 'Spending entry not found'}), 404
 
+from io import StringIO
 
+@app.route('/download_csv', methods=['GET'])
+#@login_required  # Optional: remove if download should be public
+def download_csv():
+    # Create a StringIO object to write CSV data
+    output = StringIO()
+    writer = csv.writer(output)
+
+    # Write the header row
+    writer.writerow(['ID', 'Amount', 'Description', 'Payment Method', 'Date'])
+
+    # Query all spending entries
+    spending_entries = Spending.query.all()
+
+    # Write data rows
+    for entry in spending_entries:
+        writer.writerow([entry.id, entry.amount, entry.description, entry.payment_method, entry.date.strftime('%Y-%m-%d %H:%M:%S')])
+
+    # Create a Response object and set headers
+    output.seek(0)
+    response = Response(output, mimetype='text/csv')
+    response.headers['Content-Disposition'] = 'attachment; filename=spending_data.csv'
+
+    return response
 #######################################################
 
 

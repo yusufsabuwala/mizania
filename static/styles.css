@@ -1,0 +1,186 @@
+/* General body styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f0f2f5; /* Soft background */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    padding-top: 80px; /* Ensure content doesn't overlap with the fixed header */
+    transition: all 0.3s ease-in-out; /* Smooth transition for dynamic changes */
+}
+
+/* Header styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #3e4b75, #4d8ad3); /* Gradient for a sleek header */
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for a floating effect */
+    z-index: 100;
+    color: #fff; /* White text for contrast */
+}
+
+.header h1, .header h2 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+/* Container styles */
+.container {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    padding: 30px;
+    box-sizing: border-box;
+    margin-top: 100px; /* To prevent overlap with header */
+    background-color: #ffffff;
+    border-radius: 12px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Heading styles */
+h1, h2, h3 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Input and select styling */
+input, select {
+    margin-bottom: 15px;
+    padding: 12px 16px;
+    width: 100%;
+    max-width: 350px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input:focus, select:focus {
+    border-color: #4d8ad3; /* Focus effect with color change */
+}
+
+/* Button styles */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #4d8ad3;
+    border: none;
+    border-radius: 50px; /* Circular button for a more modern style */
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #3e4b75;
+    transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+button:active {
+    background-color: #2c3e6e;
+    transform: translateY(0); /* Active state effect */
+}
+
+/* Table container styling */
+.table-container {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table header styles */
+th {
+    background-color: #4d8ad3;
+    color: white;
+    padding: 12px;
+    font-weight: 600;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for separation */
+}
+
+/* Table row and cell styling */
+td {
+    padding: 12px;
+    border-top: 1px solid #eee;
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Hover effect for rows */
+tr:hover {
+    background-color: #f4f6f9;
+    cursor: pointer;
+}
+
+/* Button styles for table actions */
+.delete-button, .edit-button, .download-button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    margin: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Delete button */
+.delete-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+/* Edit button */
+.edit-button {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #27ae60;
+}
+
+/* Download button */
+.download-button {
+    background-color: #f39c12;
+    color: white;
+}
+
+.download-button:hover {
+    background-color: #e67e22;
+}
