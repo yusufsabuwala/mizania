@@ -155,10 +155,17 @@ def track_spending_page():
 @app.route('/add_spending', methods=['POST'])
 def add_spending():
     data = request.json
-    new_spending = Spending(amount=data['amount'])
-    db.session.add(new_spending)
-    db.session.commit()
-    return jsonify({'message': 'Spending entry added successfully!'}), 201
+    amount = data.get('amount')
+    description = data.get('description')
+    payment_method = data.get('payment_method')
+
+    if amount and description and payment_method:
+        new_entry = Spending(amount=amount, description=description, payment_method=payment_method)
+        db.session.add(new_entry)
+        db.session.commit()
+        return jsonify({'message': 'Spending entry added successfully!'}), 201
+    else:
+        return jsonify({'error': 'Missing data'}), 400
 
 # Route to edit a spending entry
 @app.route('/edit_spending/<int:id>', methods=['PUT'])
@@ -187,6 +194,8 @@ def delete_spending(id):
 
 from io import StringIO
 
+
+# Route to download csv
 @app.route('/download_csv', methods=['GET'])
 #@login_required  # Optional: remove if download should be public
 def download_csv():
@@ -212,8 +221,7 @@ def download_csv():
     return response
 #######################################################
 
-
-# Route to view all transactions
+'''# Route to view all transactions
 @app.route('/transactions')
 def view_transactions():
     transactions = Transaction.query.all()
@@ -221,3 +229,4 @@ def view_transactions():
 
 if __name__ == '__main__':
     app.run(debug=True)
+'''
