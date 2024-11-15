@@ -89,25 +89,15 @@
         const amount = document.getElementById('amount').value;
         const description = document.getElementById('description').value;
         const paymentMethod = document.getElementById('payment_method').value;
-        const entryId = document.getElementById('entryId').value;
 
         const data = {
-            amount: parseFloat(amount),
+            amount: parseFloat(amount), // Ensures amount is a number
             description: description,
             payment_method: paymentMethod
         };
 
-        let url = '/add_spending';
-        let method = 'POST';
-
-        if (entryId) {
-            // Edit existing entry
-            url = `/edit_spending/${entryId}`;
-            method = 'PUT';
-        }
-
-        const response = await fetch(url, {
-            method: method,
+        const response = await fetch('/add_spending', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -115,12 +105,13 @@
         });
 
         if (response.ok) {
-            alert(entryId ? 'Spending entry updated successfully!' : 'Spending entry added successfully!');
-            location.reload();  // Reload page to update total and entries
+            alert('Spending entry added successfully!');
+            location.reload();
         } else {
-            alert('Failed to process the request.');
+            alert('Failed to add spending entry.');
         }
     };
+
 
     // Function to load an entry into the form for editing
     function editEntry(id) {
