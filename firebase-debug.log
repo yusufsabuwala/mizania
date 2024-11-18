@@ -1,15 +1,13 @@
-[debug] [2024-11-18T19:16:06.981Z] ----------------------------------------------------------------------
-[debug] [2024-11-18T19:16:06.984Z] Command:       /nix/store/aspnwxp3q1wvg8jd1zg0295zmhr3lkb3-nodejs-18.19.1/bin/node /nix/store/4y5y11gp7fmn3rr6wm7skwjrbqfy4bbw-firebase-tools-13.23.0/lib/node_modules/firebase-tools/lib/bin/firebase.js init hosting
-[debug] [2024-11-18T19:16:06.984Z] CLI Version:   13.23.0
-[debug] [2024-11-18T19:16:06.985Z] Platform:      linux
-[debug] [2024-11-18T19:16:06.985Z] Node Version:  v18.19.1
-[debug] [2024-11-18T19:16:06.985Z] Time:          Mon Nov 18 2024 19:16:06 GMT+0000 (Coordinated Universal Time)
-[debug] [2024-11-18T19:16:06.986Z] ----------------------------------------------------------------------
+[debug] [2024-11-18T20:26:33.797Z] ----------------------------------------------------------------------
+[debug] [2024-11-18T20:26:33.800Z] Command:       /nix/store/aspnwxp3q1wvg8jd1zg0295zmhr3lkb3-nodejs-18.19.1/bin/node /nix/store/4y5y11gp7fmn3rr6wm7skwjrbqfy4bbw-firebase-tools-13.23.0/lib/node_modules/firebase-tools/lib/bin/firebase.js init hosting
+[debug] [2024-11-18T20:26:33.801Z] CLI Version:   13.23.0
+[debug] [2024-11-18T20:26:33.802Z] Platform:      linux
+[debug] [2024-11-18T20:26:33.802Z] Node Version:  v18.19.1
+[debug] [2024-11-18T20:26:33.803Z] Time:          Mon Nov 18 2024 20:26:33 GMT+0000 (Coordinated Universal Time)
+[debug] [2024-11-18T20:26:33.803Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2024-11-18T19:16:06.990Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
-[debug] [2024-11-18T19:16:07.089Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2024-11-18T19:16:07.189Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
-[debug] [2024-11-18T19:16:07.190Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2024-11-18T20:26:33.813Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-18T20:26:33.814Z] > authorizing via signed-in user (yusufes52@gmail.com)
 [info] 
      ######## #### ########  ######## ########     ###     ######  ########
      ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
@@ -28,14 +26,22 @@ You're about to initialize a Firebase project in this directory:
 [info] You can create multiple project aliases by running firebase use --add, 
 [info] but for now we'll just set up a default project.
 [info] 
-[debug] [2024-11-18T19:17:11.742Z] No OAuth tokens found
-[debug] [2024-11-18T19:17:11.744Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
-[debug] [2024-11-18T19:17:11.979Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
-[debug] [2024-11-18T19:17:11.979Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
-[info] i  Using project codewithyusuf-e4c40 (codewithyusuf) 
-[info] 
-=== Hosting Setup
-[debug] [2024-11-18T19:17:19.037Z] No OAuth tokens found
-[debug] [2024-11-18T19:17:19.037Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/codewithyusuf-e4c40 [none]
-[debug] [2024-11-18T19:17:19.288Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/codewithyusuf-e4c40 200
-[debug] [2024-11-18T19:17:19.288Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/codewithyusuf-e4c40 {"projectId":"codewithyusuf-e4c40","projectNumber":"115278808641","displayName":"codewithyusuf","name":"projects/codewithyusuf-e4c40","resources":{"hostingSite":"codewithyusuf-e4c40"},"state":"ACTIVE","etag":"1_8e80d67a-b6c4-4a8d-ae5a-aa43227f458b"}
+[debug] [2024-11-18T20:26:35.919Z] No OAuth tokens found
+[debug] [2024-11-18T20:26:35.920Z] No OAuth tokens found
+[debug] [2024-11-18T20:26:35.920Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-18T20:26:35.921Z] > authorizing via signed-in user (yusufes52@gmail.com)
+[debug] [2024-11-18T20:26:35.924Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2024-11-18T20:26:36.136Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 401
+[debug] [2024-11-18T20:26:36.136Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2024-11-18T20:26:36.136Z] Got a 401 Unauthenticated error for a call that required authentication. Refreshing tokens.
+[debug] [2024-11-18T20:26:36.137Z] No OAuth tokens found
+[debug] [2024-11-18T20:26:36.137Z] No OAuth tokens found
+[debug] [2024-11-18T20:26:36.137Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-18T20:26:36.137Z] > authorizing via signed-in user (yusufes52@gmail.com)
+[debug] [2024-11-18T20:26:36.138Z] Request to https://firebase.googleapis.com/v1beta1/projects?pageSize=100 had HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2024-11-18T20:26:36.139Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects?pageSize=100 had HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+    at responseToError (/nix/store/4y5y11gp7fmn3rr6wm7skwjrbqfy4bbw-firebase-tools-13.23.0/lib/node_modules/firebase-tools/lib/responseToError.js:52:12)
+    at RetryOperation._fn (/nix/store/4y5y11gp7fmn3rr6wm7skwjrbqfy4bbw-firebase-tools-13.23.0/lib/node_modules/firebase-tools/lib/apiv2.js:312:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to list Firebase projects. See firebase-debug.log for more info.
