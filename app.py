@@ -44,9 +44,10 @@ def index():
 class Spending(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     amount = db.Column(db.Float, nullable=False)
-    description = db.Column(db.String(255), nullable=True)  # New column for details
-    payment_method = db.Column(db.String(50), nullable=True)  # New column for payment method
-    date = db.Column(db.DateTime, default=current_time_est)
+    description = db.Column(db.String(255), nullable=True)
+    payment_method = db.Column(db.String(50), nullable=True)
+    date = db.Column(db.DateTime, default=lambda: datetime.now(ZoneInfo("America/New_York")))
+
 
 
 # Route to render the spending page and display all current month entries
@@ -71,10 +72,21 @@ def track_spending_page():
 @app.route('/add_spending', methods=['POST'])
 def add_spending():
     data = request.json
-    new_spending = Spending(amount=data['amount'],description=data['description'],payment_method=data['payment_method'])
-    db.session.add(new_spending)
-    db.session.commit()
-    return jsonify({'message': 'Spending entry added successfully!'}), 201
+    try:
+        date = datetime.strptime(data['date'], '%Y-%m-%d') if 'date' in data else datetime.now(ZoneInfo("America/New_York"))
+        new_spending = Spending(
+            amount=data['amount'],
+            description=data['description'],
+            payment_method=data['payment_method'],
+            date=date
+        )
+        db.session.add(new_spending)
+        db.session.commit()
+        return jsonify({'message': 'Spending entry added successfully!'}), 201
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({'error': 'Invalid data'}), 400
+
 
 # Route to edit a spending entry
 @app.route('/edit_spending/<int:id>', methods=['PUT'])
@@ -82,13 +94,20 @@ def edit_spending(id):
     data = request.json
     spending_entry = Spending.query.get(id)
     if spending_entry:
-        spending_entry.amount = data['amount']
-        spending_entry.description = data['description']
-        spending_entry.payment_method = data['payment_method']
-        db.session.commit()
-        return jsonify({'message': 'Spending entry updated successfully!'}), 200
+        try:
+            spending_entry.amount = data['amount']
+            spending_entry.description = data['description']
+            spending_entry.payment_method = data['payment_method']
+            if 'date' in data:
+                spending_entry.date = datetime.strptime(data['date'], '%Y-%m-%d')
+            db.session.commit()
+            return jsonify({'message': 'Spending entry updated successfully!'}), 200
+        except Exception as e:
+            print("Error:", e)
+            return jsonify({'error': 'Invalid data'}), 400
     else:
         return jsonify({'error': 'Spending entry not found'}), 404
+
 
 # Route to delete a spending entry by ID
 @app.route('/delete_spending/<int:id>', methods=['DELETE'])
