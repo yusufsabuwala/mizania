@@ -21,7 +21,7 @@ body {
     left: 0;
     width: 100%;
     background: linear-gradient(90deg, #3e4b75, #4d8ad3); /* Gradient for a sleek header */
-    padding: 20px 0;
+    padding: 0 0;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for a floating effect */
     z-index: 100;
@@ -54,7 +54,8 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%; /* Ensures the form stretches to the container's width */
-    max-width: 350px; /* Limits the form width */
+    max-width: fit-content; /* Limits the form width */
+    margin: 0 auto;
     margin-bottom: 20px; /* Adds space below the form */
 }
 
@@ -89,7 +90,7 @@ input, select {
 }
 
 input:focus, select:focus {
-    border-color: #4d8ad3; /* Focus effect with color change */
+    border-color: #4275b3; /* Focus effect with color change */
 }
 
 /* Button styles */
@@ -97,7 +98,7 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     color: white;
-    background-color: #4d8ad3;
+    background-color: #4275b3;
     border: none;
     border-radius: 50px; /* Circular button for a more modern style */
     cursor: pointer;
@@ -117,12 +118,12 @@ button:active {
 
 /* Table container styling */
 .table-container {
-    max-height: 300px;
+    max-height: 600px;
     overflow-y: auto;
     margin-top: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0); */
 }
 
 /* Table styling */

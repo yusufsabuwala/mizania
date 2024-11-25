@@ -10,7 +10,8 @@
 <body>
     <div class="container">
         <h1>${{ total_spending }}</h1>
-
+    </div>
+    <div class="container">
         <form id="addSpendingForm" class="form-container">
             <label for="amount">Enter Amount:</label>
             <input type="number" id="amount" name="amount" step="0.01" required>
@@ -44,9 +45,11 @@
             <input type="date" id="date" name="date" required> <!-- Added date input -->
         
             <input type="hidden" id="entryId" name="entryId"> <!-- Hidden field for editing -->
-            <button type="submit" id="submitButton">Add Amount</button>
+            <button type="submit" id="submitButton">Submit</button>
         </form>        
+    </div>
 
+    <div class="container">
         <button class="download-button" onclick="window.location.href='/download_csv'">Download CSV</button>
 
         <h3>Spending Entries for This Month</h3>
@@ -88,7 +91,7 @@
     window.onload = function() {
         document.getElementById('addSpendingForm').reset();
         document.getElementById('entryId').value = ''; // Ensure hidden entry ID field is cleared
-        document.getElementById('submitButton').textContent = 'Add Amount'; // Reset button text
+        document.getElementById('submitButton').textContent = 'Submit'; // Reset button text
     };
 
     // Handle form submission for adding/editing a spending entry
@@ -145,7 +148,7 @@
         document.getElementById('payment_method').value = row.children[4].textContent.toLowerCase();
         document.getElementById('date').value = row.children[5].textContent;
         document.getElementById('entryId').value = id;
-        document.getElementById('submitButton').textContent = 'Update Amount';  // Change button text for editing
+        document.getElementById('submitButton').textContent = 'Update';  // Change button text for editing
     }
 
     // Function to confirm deletion before proceeding
