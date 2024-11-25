@@ -52,7 +52,7 @@ class Spending(db.Model):
 
 
 # Route to render the spending page and display all current month entries
-@app.route('/budget', methods=['GET'])
+@app.route('/mizania_bs', methods=['GET'])
 def track_spending_page():
     current_month = datetime.utcnow().month
     current_year = datetime.utcnow().year
@@ -67,7 +67,7 @@ def track_spending_page():
         db.extract('year', Spending.date) == current_year
     ).all()
 
-    return render_template('budget.html', total_spending=total_spending, spending_entries=spending_entries)
+    return render_template('mizania_bs.html', total_spending=total_spending, spending_entries=spending_entries)
 
 # Route to handle adding a new spending entry
 @app.route('/add_spending', methods=['POST'])
