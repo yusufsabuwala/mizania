@@ -10,6 +10,7 @@ class Spending(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     amount = db.Column(db.Float, nullable=False)
     description = db.Column(db.String(255), nullable=True)
+    category = db.Column(db.String(255), nullable=True)
     payment_method = db.Column(db.String(50), nullable=True)
     date = db.Column(db.DateTime, default=lambda: datetime.now(ZoneInfo("America/New_York")))
 

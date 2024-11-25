@@ -45,6 +45,7 @@ class Spending(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     amount = db.Column(db.Float, nullable=False)
     description = db.Column(db.String(255), nullable=True)
+    category = db.Column(db.String(255), nullable=True)
     payment_method = db.Column(db.String(50), nullable=True)
     date = db.Column(db.DateTime, default=lambda: datetime.now(ZoneInfo("America/New_York")))
 
@@ -77,6 +78,7 @@ def add_spending():
         new_spending = Spending(
             amount=data['amount'],
             description=data['description'],
+            category=data['category'],
             payment_method=data['payment_method'],
             date=date
         )
@@ -97,6 +99,7 @@ def edit_spending(id):
         try:
             spending_entry.amount = data['amount']
             spending_entry.description = data['description']
+            spending_entry.category = data['category']
             spending_entry.payment_method = data['payment_method']
             if 'date' in data:
                 spending_entry.date = datetime.strptime(data['date'], '%Y-%m-%d')

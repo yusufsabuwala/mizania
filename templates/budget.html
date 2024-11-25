@@ -14,9 +14,12 @@
         <form id="addSpendingForm" class="form-container">
             <label for="amount">Enter Amount:</label>
             <input type="number" id="amount" name="amount" step="0.01" required>
-        
+
             <label for="description">Description:</label>
-            <select id="description" name="description">
+            <input type="text" id="description" name="description" placeholder="Enter a description here" required>
+        
+            <label for="category">Category:</label>
+            <select id="category" name="category">
                 <option value="food_take_out">Food - Take out</option>
                 <option value="groceries">Groceries</option>
                 <option value="shopping">Shopping</option>
@@ -54,6 +57,7 @@
                         <th>ID</th>
                         <th>Amount</th>
                         <th>Description</th>
+                        <th>Category</th>
                         <th>Payment Method</th>
                         <th>Date</th>
                         <th>Actions</th>
@@ -65,6 +69,7 @@
                             <td>{{ entry.id }}</td>
                             <td>${{ entry.amount }}</td>
                             <td>{{ entry.description }}</td>
+                            <td>{{ entry.category }}</td>
                             <td>{{ entry.payment_method }}</td>
                             <td>{{ entry.date.strftime('%Y-%m-%d') }}</td>
                             <td>
@@ -91,6 +96,7 @@
     e.preventDefault();
     const amount = document.getElementById('amount').value;
     const description = document.getElementById('description').value;
+    const category = document.getElementById('category').value;
     const paymentMethod = document.getElementById('payment_method').value;
     const date = document.getElementById('date').value; // Add date field
     const entryId = document.getElementById('entryId').value;
@@ -98,6 +104,7 @@
     const data = {
         amount: parseFloat(amount),
         description: description,
+        category: category,
         payment_method: paymentMethod,
         date: date // Include date in request
     };
@@ -134,8 +141,9 @@
         const row = document.querySelector(`tr[data-id="${id}"]`);
         document.getElementById('amount').value = row.children[1].textContent.replace('$', '');
         document.getElementById('description').value = row.children[2].textContent;
-        document.getElementById('payment_method').value = row.children[3].textContent.toLowerCase();
-        document.getElementById('date').value = row.children[4].textContent;
+        document.getElementById('category').value = row.children[3].textContent.toLowerCase();
+        document.getElementById('payment_method').value = row.children[4].textContent.toLowerCase();
+        document.getElementById('date').value = row.children[5].textContent;
         document.getElementById('entryId').value = id;
         document.getElementById('submitButton').textContent = 'Update Amount';  // Change button text for editing
     }
