@@ -72,15 +72,15 @@
                 <h4 class="card-title mb-4 text-center">Add New Spending</h4>
                 <form id="addSpendingForm" class="row g-3">
                     <div class="col-md-4">
-                        <label for="amount" class="form-text">Amount ($)</label>
+                        <label for="amount" class="form-label">Amount ($)</label>
                         <input type="number" id="amount" name="amount" step="0.01" class="form-control" required>
                     </div>
                     <div class="col-md-8">
-                        <label for="description" class="form-text">Description</label>
+                        <label for="description" class="form-label">Description</label>
                         <input type="text" id="description" name="description" class="form-control" placeholder="Enter a description" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="category" class="form-text">Category</label>
+                        <label for="category" class="form-label">Category</label>
                         <select id="category" name="category" class="form-select">
                             <option value="food_take_out">Food - Take Out</option>
                             <option value="groceries">Groceries</option>
@@ -93,7 +93,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="payment_method" class="form-text">Payment Method</label>
+                        <label for="payment_method" class="form-label">Payment Method</label>
                         <select id="payment_method" name="payment_method" class="form-select">
                             <option value="apple_card">Apple Card</option>
                             <option value="chase">Chase</option>
@@ -104,7 +104,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="date" class="form-text">Date</label>
+                        <label for="date" class="form-label">Date</label>
                         <input type="date" id="date" name="date" class="form-control" required>
                     </div>
                     <input type="hidden" id="entryId" name="entryId"> <!-- Hidden field for editing -->
